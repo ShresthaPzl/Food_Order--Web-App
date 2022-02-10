@@ -1,0 +1,99 @@
+/* 
+    Author: Pzl Shrestha;
+    Theme: Food Order Website;
+    Version: 1.0;
+
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper{
+    border: 1px;
+    padding: 1%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.clearfix{
+    float: none;
+    clear: both;
+}
+
+
+
+
+
+
+
+
+
+
+/* CSS FOR MENU */
+.menu{
+    border-bottom: 2px solid goldenrod ;
+}
+
+.menu ul{
+    list-style-type: none;
+}
+
+.menu ul li{
+    display: inline;
+    padding: 1%;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: #ff6b81;
+    font-weight: bold;
+    font-style: initial;
+}
+
+.menu ul li a:hover{
+    color: #ff4757;
+}
+
+
+
+
+
+
+
+
+/* CSS FOR MAIN CONTENT */
+
+.main-content{
+    background-color: #a4b0be;
+    padding: 3% 0;
+}
+
+.col-4{
+    width: 18%;
+    background-color: whitesmoke;
+    margin: 1%;
+    padding: 2%;
+    float: left;
+}
+
+
+
+
+
+
+
+
+
+
+/* CSS FOR FOOTER */
+.footer{
+    background-color: #ff4757;
+    color: aliceblue;
+}

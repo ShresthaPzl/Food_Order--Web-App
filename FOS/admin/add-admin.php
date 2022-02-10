@@ -8,10 +8,10 @@
 
         <?php
             // Checking whether the session is set or not
-            if(isset($_SESSION['add']))
+            if(isset($_SESSION['add-admin']))
             {
-                echo $_SESSION['add']; // Display the session message
-                unset($_SESSION['add']); // Remove the session message
+                echo $_SESSION['add-admin']; // Display the session message
+                unset($_SESSION['add-admin']); // Remove the session message
             }
 
 
@@ -80,7 +80,7 @@
                     //echo "Data added successfully!";
 
                     // Create a session variable to display the message
-                    $_SESSION['success'] = "<div class='success'>Admin Added Successfully :) </div>";
+                    $_SESSION['add-admin'] = "<div class='success'>Admin Added Successfully :) </div>";
 
                     // Redirect page to manage-admin page
                     header('location:' . $siteURL . 'admin/manage-admin.php');
@@ -92,7 +92,7 @@
                     //echo "Fail to insert data";
 
                     // Create a session variable to display the message
-                    $_SESSION['success'] = "<div class='error'>Failed to add Admin :( </div>";
+                    $_SESSION['add-admin'] = "<div class='error'>Failed to add Admin :( </div>";
 
                     // Redirect page to manage-admin page
                     header('location:' . $siteURL . 'admin/add-admin.php');

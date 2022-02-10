@@ -8,11 +8,46 @@
             <br><br>
 
             <?php
-            if (isset($_SESSION['success'])) {
-                echo $_SESSION['success']; // Displaying the session message
-                unset($_SESSION['success']); // Removing the session Message once it displayed
+            // Checking and Displaying Add Admin Session
+            if (isset($_SESSION['add-admin'])) {
+                echo $_SESSION['add-admin']; // Displaying the session message
+                unset($_SESSION['add-admin']); // Removing the session Message once it displayed
             }
 
+            // Checking and Displaying Delete Admin Session
+            if(isset($_SESSION['delete-admin']))
+            {
+                echo $_SESSION['delete-admin'];
+                unset($_SESSION['delete-admin']);
+            }
+
+            // Checking and Displaying Update Admin Session
+            if(isset($_SESSION['update-admin']))
+            {
+                echo $_SESSION['update-admin'];
+                unset($_SESSION['update-admin']);
+            }
+
+            // CHecking and Displaying User not Found Session 
+            if(isset($_SESSION['user-not-fount']))
+            {
+                echo $_SESSION['user-not-fount'];
+                unset($_SESSION['user-not-fount']);
+            }
+            
+            // Checking and Displaying Password not Match Session
+            if(isset($_SESSION['password-not-match']))
+            {
+                echo $_SESSION['password-not-match'];
+                unset($_SESSION['password-not-match']);
+            }
+
+            // Checking and Displaying change password Session
+            if(isset($_SESSION['change-password']))
+            {
+                echo $_SESSION['change-password'];
+                unset($_SESSION['change-password']);
+            }
 
             ?>
 
@@ -59,12 +94,13 @@
                             // Displaying the values in out table
                 ?>
                             <tr>
-                                <td> <?= $sn++; ?> </td>
-                                <td> <?= $full_name; ?> </td>
-                                <td> <?= $username; ?></td>
+                                <td> <?=$sn++; ?> </td>
+                                <td> <?=$full_name; ?> </td>
+                                <td> <?=$username; ?></td>
                                 <td>
-                                    <a href="#" class="btn-secondary">Update</a>
-                                    <a href="#" class="btn-danger">Delete</a>
+                                    <a href=" <?= $siteURL; ?>admin/update-password.php?id= <?=$id; ?>" class="btn-primary">Change Password</a>
+                                    <a href=" <?= $siteURL; ?>admin/update-admin.php?id= <?=$id; ?>" class="btn-secondary">Update</a>
+                                    <a href=" <?= $siteURL; ?>admin/delete-admin.php?id= <?=$id; ?>" class="btn-danger">Delete</a>
                                 </td>
                             </tr>
 

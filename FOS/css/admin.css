@@ -158,3 +158,18 @@ table tr td{
     background-color: #ff4757;
     color: aliceblue;
 }
+
+
+
+
+
+
+/* CSS FOR LOGIN */
+
+.login{
+    border: 1px solid greenyellow;
+    width: 20%;
+    margin: 10% auto;
+    padding: 2%;
+
+}

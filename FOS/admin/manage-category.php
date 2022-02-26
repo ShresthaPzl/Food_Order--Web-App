@@ -18,6 +18,42 @@
                 unset($_SESSION['add']);
             }
 
+            // Checing and Displaying the remove session
+            if (isset($_SESSION['remove'])) {
+                echo $_SESSION['remove'];
+                unset($_SESSION['remove']);
+            }
+
+            // Checing and Displaying the delete session
+            if (isset($_SESSION['delete'])) {
+                echo $_SESSION['delete'];
+                unset($_SESSION['delete']);
+            }
+
+            // Cheking and Displaying the no-category-found session
+            if (isset($_SESSION['no-category-found'])) {
+                echo $_SESSION['no-category-found'];
+                unset($_SESSION['no-category-found']);
+            }
+
+            // Checking and Displaying the update Session
+            if (isset($_SESSION['update'])) {
+                echo $_SESSION['update'];
+                unset($_SESSION['update']);
+            }
+
+            // Checking and Displaying the update session
+            if (isset($_SESSION['upload'])) {
+                echo $_SESSION['upload'];
+                unset($_SESSION['upload']);
+            }
+
+            // Checking and Displaying the failed-remove session
+            if (isset($_SESSION['failed-remove'])) {
+                echo $_SESSION['failed-remove'];
+                unset($_SESSION['failed-remove']);
+            }
+
             ?>
 
             <br>
@@ -53,39 +89,34 @@
                         $image_name = $row['image_name'];
                         $featured = $row['featured'];
                         $active = $row['active'];
-
-
-
+                        
                 ?>
 
                         <tr>
-                            <td> <?=$sn++; ?> </td>
-                            <td> <?=$title; ?> </td>
-                            
-                            <td> 
-                                <?php
-                                    // Check whether image is available or not
-                                    if($image_name!= "")
-                                    {
-                                        // Display the image
-                                        ?>
-                                            <img src="<?=$siteURL; ?>images/Database Storage/Category/<?=$image_name; ?>" width="100px">
-                                        <?php
+                            <td> <?= $sn++; ?> </td>
+                            <td> <?= $title; ?> </td>
 
-                                    }
-                                    else
-                                    {
-                                        // Display the message
-                                        echo "<div class='error'> Image Not Added. </div>";
-                                    }
+                            <td>
+                                <?php
+                                // Check whether image is available or not
+                                if ($image_name != "") {
+                                    // Display the image
+                                ?>
+                                    <img src="<?= $siteURL; ?>images/StorageDB/Category/<?= $image_name; ?>" width="100px">
+                                <?php
+
+                                } else {
+                                    // Display the message
+                                    echo "<div class='error'> Image Not Added. </div>";
+                                }
                                 ?>
                             </td>
 
-                            <td> <?=$featured; ?> </td>
-                            <td> <?=$active; ?> </td>
+                            <td> <?= $featured; ?> </td>
+                            <td> <?= $active; ?> </td>
                             <td>
-                                <a href="#" class="btn-secondary">Update</a>
-                                <a href="#" class="btn-danger">Delete</a>
+                                <a href="<?= $siteURL; ?>admin/update-category.php?id= <?= $id; ?>" class="btn-secondary">Update</a>
+                                <a href="<?= $siteURL; ?>admin/delete-category.php?id= <?= $id; ?>&image_name=<?= $image_name; ?>" class="btn-danger">Delete</a>
                             </td>
                         </tr>
 

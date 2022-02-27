@@ -13,6 +13,30 @@
                 echo $_SESSION['add'];
                 unset($_SESSION['add']);
             }
+
+            // Checking and Displaying the delete Session
+            if(isset($_SESSION['delete'])) {
+                echo $_SESSION['delete'];
+                unset($_SESSION['delete']);
+            }
+
+            // Checking and Displaying the upload Session
+            if(isset($_SESSION['upload'])) {
+                echo $_SESSION['upload'];
+                unset($_SESSION['upload']);
+            }
+
+            // Checing and Displaying the unauthorized Session
+            if(isset($_SESSION['unauthorized'])) {
+                echo $_SESSION['unauthorized'];
+                unset($_SESSION['unauthorized']);
+            }
+            
+            // Checing and Displaying the update Session
+            if(isset($_SESSION['update'])) {
+                echo $_SESSION['update'];
+                unset($_SESSION['update']);
+            }
             ?>
 
             <br><br>
@@ -83,8 +107,8 @@
                             <td><?= $featured; ?> </td>
                             <td><?= $active; ?> </td>
                             <td>
-                                <a href="#" class="btn-secondary">Update</a>
-                                <a href="#" class="btn-danger">Delete</a>
+                                <a href="<?= $siteURL; ?>admin/update-food.php?id=<?=$id; ?>" class="btn-secondary">Update</a>
+                                <a href="<?=$siteURL;?>admin/delete-food.php?id=<?=$id; ?>&image_name=<?=$image_name; ?>" class="btn-danger">Delete</a>
                             </td>
                         </tr>
 

@@ -195,7 +195,7 @@
                 }
 
             // 3. Insert into database
-
+            
                 // Create a SQL Query to insert into database
                 $sql2 = "INSERT INTO tbl_food SET
                     title = '$title',
@@ -211,6 +211,7 @@
                 $statement = mysqli_query($conn, $sql2);
 
                 // Check whether data inserted or not
+                // 4. Redirect with message to manage food page
                 if($statement == TRUE){
 
                     // Data inserted successfully
@@ -224,7 +225,7 @@
                     header('location:'.$siteURL.'admin/manage-food.php');
                 }
 
-            // 4. Redirect with message to manage food page
+            
 
 
         }

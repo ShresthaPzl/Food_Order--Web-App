@@ -37,6 +37,12 @@
                 echo $_SESSION['update'];
                 unset($_SESSION['update']);
             }
+
+            // Checing and Displaying the add food session
+            if(isset($_SESSION['add-food'] )) {
+                echo $_SESSION['add-food'] ;
+                unset($_SESSION['add-food'] );
+            }
             ?>
 
             <br><br>
@@ -74,7 +80,6 @@
                     // Getj the food from database and Display
                     while ($row = mysqli_fetch_assoc($statement)) {
                         // Get the values from individual colums
-                        $sn++;
                         $id = $row['id'];
                         $title = $row['title'];
                         $price = $row['price'];

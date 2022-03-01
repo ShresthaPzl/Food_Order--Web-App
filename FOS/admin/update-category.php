@@ -136,7 +136,7 @@
 
 
                 // Rename the Image
-                $image_name = "Food_Category_" . rand(000, 99) . '.' . $exe; // e.g. Food_Category_093.jpg 
+                $image_name = "Food_Category_".rand(000, 99).'.'.$exe; // e.g. Food_Category_093.jpg 
 
 
 
@@ -163,7 +163,7 @@
                 // B. Remove the Current Image if available
 
                 if($current_image != ""){
-                    $remove_path = "../images/StorageDB/Category/" . $current_image;
+                    $remove_path = "../images/StorageDB/Category/".$current_image;
 
                     $remove = unlink($remove_path);
 
@@ -181,6 +181,8 @@
                 }
 
                
+            }else {
+                $image_name = $current_image;
             }
         } else {
 

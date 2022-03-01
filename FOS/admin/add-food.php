@@ -6,10 +6,9 @@
 
         <br><br>
 
-        
         <?php
-        // Checking and Displaying upload Session
-            if(isset($_SESSION['upload'])){
+            // checking and displaying the upload session
+            if(isset($_SESSION['upload'])) {
                 echo $_SESSION['upload'];
                 unset($_SESSION['upload']);
             }
@@ -51,6 +50,7 @@
                         <select name="category">
 
                         <?php
+
                             // Create PHP code to display categories from database
 
                             // 1. Create SQL Query to get all active categories from database
@@ -59,35 +59,32 @@
                             // Execute the query
                             $statement = mysqli_query($conn, $sql);
 
-                            // Count Rows to check whether we have categories or not
+                            // Count the rows
                             $count = mysqli_num_rows($statement);
 
-                            // If count is greater than zero, we have categories else we don't have categories
-                            if($count > 0){
-                                // We have categories
-                                while($row = mysqli_fetch_assoc($statement)){
+                            // Check whether the rows are available or not
+                            if($count > 0 ){
+
+                                // Categories is available
+                                while($row = mysqli_fetch_assoc($statement)) {
+                                    
                                     // Get the details of category
                                     $id = $row['id'];
                                     $title = $row['title'];
-                                    ?>
-                                    // Display on Dropdown
-                                    <option value="<?=$id; ?>"><?=$title; ?></option>
 
-                                    <?php
+                                    echo "<option value='$id'>$title</option>";
 
                                 }
 
                             } else {
-                                // We don't have category
-                                ?>
-                                <option value="0">No Category Found</option>
-                                <?php
+
+                                // Categories is not available
+                                echo "<option value='0'> No Category Found</option>";
                             }
-
-                            
-
-
+                            // 2. Display on Dropdown
                         ?>
+    
+                               
                         </select>
                     </td>
                 </tr>
@@ -114,122 +111,130 @@
                     </td>
                 </tr>
             </table>
-        </form>
-
+        </form> 
+        
         <?php
-        if(isset($_POST['submit'])){
-            //echo "Clicked";
-            // Add the food in Database
 
-            // 1. Get the data from form
-            
-            $title = $_POST['title'];
-            $description = $_POST['description'];
-            $price = $_POST['price'];
-            $category = $_POST['category'];
+            // Check whether the sumbit button is clicked or not
+            if(isset($_POST['submit'])) {
+                
+                // Button Clicked
+                // echo "Clicked";
 
-            // Check whether radio button for featured and active are checked or not
-            if(isset($_POST['featured'])){
-                $featured = $_POST['featured'];
-            } else {
-                $featured = "No"; // Setting the default value
-            }
+                // Get all the food detail from form
+                $title = $_POST['title'];
+                $description = $_POST['description'];
+                $price= $_POST['price'];
+                $category = $_POST['category'];
+                
+                // For radio type, we need to check whether button is clicked or not
+                // For Featured
+                if(isset($_POST['featured'])) {
 
-            if(isset($_POST['active'])){
-                $active = $_POST['active'];
-            } else {
-                $active = "No"; // Setting the default value
-            }
+                    // Get the value from the form
+                    $featured = $_POST['featured'];
+                } else {
+                    // Set the default value
+                    $featured = "No";
+                }
 
-            // 2. Upload the image if selected
+                // For Active 
+                if(isset($_POST['active'])) {
 
-                // Check whether select image is clicked or not and upload the image only if the image is selected
-                if(isset($_FILES['image']['name'])){
+                    // Get the value from the form
+                    $active = $_POST['active'];
+
+                } else {
+
+                    // Set default value
+                    $active = "No";
+                }
+
+                // Check whether the image is selected or not and set the value for image accordingly
+                // print_r($_FILES['image']);
+
+                // 2. Upload the image if selected
+
+                if(isset($_FILES['image']['name'])) {
 
                     // Get the details of the selected image
                     $image_name = $_FILES['image']['name'];
 
                     // Check whether the image is selected or not and upload image only if selected
-                    if($image_name != ""){
+                    if($image_name != "") {
 
                         // Image is selected
+
                         // A. Rename the image
-                            // Get the extension of selected image (jpg, png, gif, etc)
+                            // Get the extension of selected image
                             $exe = end(explode('.', $image_name));
 
-                            // Create New Image  name for Image
-                            $image_name = "Food-Name-".rand(0000, 9999).".".$exe;
+                            // Create new name form image
+                            $image_name = "Food-Name-".rand(000, 999).".".$exe;
 
                         // B. Upload the image
-                            // Get the src path and Destination path
 
-                            // Sorce path is the current location of the image
-                            $src = $_FILES['image']['tmp_name'];
+                            // Get the source and Destination path
 
-                            // Destination Path for the image to be uploaded
+                            // Get the source file path
+                            $src = $_FILES['image'] ['tmp_name'];
+
+                            // Get the destination path for the image to be uploaded
                             $des = "../images/StorageDB/Food/".$image_name;
 
                             // Finally upload the food image
-
                             $upload = move_uploaded_file($src, $des);
 
-                            // Check whether the image uploaded or not 
+                            // Check wether image uploaded or not
+                            if($upload == FALSE) {
 
-                            if($upload == FALSE){
-                                // Image is not uploaded
-                                // Redirect to add-food page with error message
-                                $_SESSION['upload'] = "<div class='error'> Failed to Uplaod Image! </div>";
+                                // Failed to upload image
+                                // REdirect to add food page with session message
+                                $_SESSION['upload'] = "<div class='error'> Failed to Upload Image!</div>";
                                 header('location:'.$siteURL.'admin/add-food.php');
                                 // Stop the process
                                 die();
                             }
 
+                    }
+
+
+                } else {
+
+                    $image_name = "";  // Setting default value as blank
+                }
+
+                // 3. Insert Into the Database
+
+                    // Create SQL Query to save in the database
+                    $sql2 = "INSERT INTO tbl_food SET
+                        title = '$title',
+                        description = '$description',
+                        price = $price,
+                        image_name = '$image_name',
+                        category_id = $category,
+                        featured = '$featured',
+                        active = '$active'
+                    ";
+
+                    // Execute the query
+                    $statement2 = mysqli_query($conn, $sql2);
+
+                    // Check whether data inserted or not
+                    if($statement2 == TRUE) {
+
+                        // Data is Inserted
+                        $_SESSION['add'] = "<div class='success'> Food Added Successfully!</div>";
+                        header('location:'.$siteURL.'admin/manage-food.php');
                     } else {
+
+                        // Data is not Inserted
+                        $_SESSION['add'] = "<div class='error'> Failed to Add Food!</div>";
+                        header('location:'.$siteURL.'admin/manage-food.php');
 
                     }
 
-                } else {
-
-                    // Setting default value as blank
-                    $image_name = ""; 
-                }
-
-            // 3. Insert into database
-            
-                // Create a SQL Query to insert into database
-                $sql2 = "INSERT INTO tbl_food SET
-                    title = '$title',
-                    description = '$description',
-                    price = $price,
-                    image_name = '$image_name',
-                    category_id = '$category',
-                    featured = '$featured',
-                    active  = '$active'
-                ";
-
-                // Execute the query
-                $statement = mysqli_query($conn, $sql2);
-
-                // Check whether data inserted or not
-                // 4. Redirect with message to manage food page
-                if($statement == TRUE){
-
-                    // Data inserted successfully
-                    $_SESSION['add'] = "<div class='success'> Food Added Successfully! </div>";
-                    header('location:'.$siteURL.'admin/manage-food.php');
-
-                } else {
-                    // Failed to insert data
-                    // Redirect with error message
-                    $_SESSION['add'] = "<div class='error'> Failed To Add Food! </div>";
-                    header('location:'.$siteURL.'admin/manage-food.php');
-                }
-
-            
-
-
-        }
-
+            }
         ?>
     </div>
 </div>

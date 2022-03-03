@@ -12,6 +12,14 @@
     </div>
 </section>
 <!-- fOOD sEARCH Section Ends Here -->
+<br><br>
+<?php
+    // Checking and Displaying order session
+    if(isset($_SESSION['order'])) {
+        echo $_SESSION['order'];
+        unset($_SESSION['order']);
+    }
+?>
 
 <!-- CAtegories Section Starts Here -->
 <section class="categories">
@@ -132,7 +140,7 @@
                         </p>
                         <br>
 
-                        <a href="order.html" class="btn btn-primary">Order Now</a>
+                        <a href="<?=$siteURL; ?>order.php?food_id=<?=$id; ?>" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
 

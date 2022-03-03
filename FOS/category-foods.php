@@ -62,6 +62,7 @@ if (isset($_GET['category_id'])) {
             while ($row2 = mysqli_fetch_assoc($statement2)) {
 
                 // Get all the values and data
+                $id = $row2['id'];
                 $title = $row2['title'];
                 $price = $row2['price'];
                 $description = $row2['description'];
@@ -95,7 +96,7 @@ if (isset($_GET['category_id'])) {
                         </p>
                         <br>
 
-                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <a href="<?=$siteURL; ?>order.php?food_id=<?=$id; ?>" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
                     
